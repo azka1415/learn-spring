@@ -23,11 +23,18 @@ public class CustomerListDataAccessService implements CustomerDao {
 
     @Override
     public Optional<Customer> selectCustomerById(Integer customerId) {
-        return customers.stream().filter(customer -> customer.getId().equals(customerId)).findFirst();
+        return customers.stream()
+                .filter(customer -> customer.getId().equals(customerId)).findFirst();
     }
 
     @Override
     public void insertCustomer(Customer customer) {
         customers.add(customer);
+    }
+
+    @Override
+    public boolean existsPersonWithEmail(String email) {
+        return customers.stream()
+                .anyMatch(c -> c.getEmail().equals(email));
     }
 }
