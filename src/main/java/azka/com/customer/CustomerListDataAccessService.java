@@ -25,4 +25,9 @@ public class CustomerListDataAccessService implements CustomerDao {
     public Optional<Customer> selectCustomerById(Integer customerId) {
         return customers.stream().filter(customer -> customer.getId().equals(customerId)).findFirst();
     }
+
+    @Override
+    public void insertCustomer(Customer customer) {
+        customers.add(customer);
+    }
 }
