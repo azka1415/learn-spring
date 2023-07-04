@@ -1,8 +1,7 @@
 package azka.com.customer;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import azka.com.request.CustomerRegistrationRequest;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +22,10 @@ public class CustomerController {
     @GetMapping(path = "api/v1/customers/{customerId}")
     public Customer getCustomer(@PathVariable(name = "customerId") Integer customerId) {
         return customerService.getCustomerById(customerId);
+    }
+
+    @PostMapping(path = "api/v1/customers")
+    public void addCustomer(@RequestBody CustomerRegistrationRequest request) {
+        customerService.addCustomer(request);
     }
 }
