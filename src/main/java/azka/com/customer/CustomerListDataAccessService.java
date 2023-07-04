@@ -1,15 +1,13 @@
 package azka.com.customer;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CustomerDataAccessService implements CustomerDao {
+public class CustomerListDataAccessService implements CustomerDao {
     public static List<Customer> customers;
     static {
         customers = new ArrayList<>();
