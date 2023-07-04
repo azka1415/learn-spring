@@ -1,6 +1,8 @@
 package azka.com.customer;
 
+import azka.com.exception.DuplicateResourceException;
 import azka.com.exception.ResourceNotFound;
+import azka.com.request.CustomerRegistrationRequest;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,14 @@ public class CustomerService {
     public Customer getCustomerById(Integer id) {
         return customerDao.selectCustomerById(id)
                 .orElseThrow(() -> new ResourceNotFound("Customer with id [%s] does not exist".formatted(id)));
+    }
+
+    public void addCustomer(CustomerRegistrationRequest request) {
+        if (customerDao.existsPersonWithEmail(request.email())) {
+            throw new DuplicateResourceException("email already taken");
+        }
+        customerDao.insertCustomer(
+                new Customer(request.name(), request.email(), request.age())
+        );
     }
 }
