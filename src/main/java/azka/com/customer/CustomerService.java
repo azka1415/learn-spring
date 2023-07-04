@@ -1,5 +1,6 @@
 package azka.com.customer;
 
+import azka.com.exception.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,6 @@ public class CustomerService {
 
     public Customer getCustomerById(Integer id) {
         return customerDao.selectCustomerById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Customer with id [%s] does not exist".formatted(id)));
+                .orElseThrow(() -> new ResourceNotFound("Customer with id [%s] does not exist".formatted(id)));
     }
 }
